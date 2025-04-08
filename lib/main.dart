@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'tela_inicio.dart';
 
 void main() {
   runApp(LoginApp());
@@ -65,7 +66,12 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) =>HomePage()),
+                  );
+              },
                style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue, // Cor de fundo do botão
                 foregroundColor: Colors.white, //Cor do texto do botão
