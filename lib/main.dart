@@ -16,19 +16,37 @@ class LoginApp extends StatelessWidget {
   }
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
+  void _validarLogin() {
+    String email = _emailController.text.trim();
+    String senha = _senhaController.text;
+
+    if (email == 'admin@teste.com' && senha == '123456') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Email ou senha inválidos.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-
-        ),
-        ),
+        title: Text('Login', style: TextStyle(color: Colors.white)),
+        centerTitle: true,
         backgroundColor: Colors.blue,
         elevation: 4,
       ),
@@ -67,10 +85,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 32.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) =>HomePage()),
-                  );
+                _validarLogin();
               },
                style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue, // Cor de fundo do botão
@@ -83,7 +98,10 @@ class LoginPage extends StatelessWidget {
                ),
        
                 // Lógica de autenticação do usuário
-              child: Text('Login'),
+              child: Text(
+                'Login',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+           ),
             ),
           ],
         ),
